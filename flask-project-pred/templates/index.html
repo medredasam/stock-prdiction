@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeFi Web3 Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">staco</div>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Pages</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Blogs</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Trading DeFi Web3</h1>
+            <h2>Blockchain Trading on the Decentralized Web: An Introduction to Web 3.0</h2>
+            <p>Exploring the Opportunities and Challenges</p>
+            <button class="cta-button">Trade Now</button>
+        </div>
+    </section>
+
+    <section class="chains-section">
+        <h3>SUPPORTED MULTI-CHAIN & TOKENS</h3>
+        <div class="chains-grid">
+            <!-- Ici vous ajouterez les logos des chaînes -->
+            <div class="chain-logo">Ethereum</div>
+            <div class="chain-logo">Binance</div>
+            <div class="chain-logo">Polygon</div>
+            <div class="chain-logo">Avalanche</div>
+            <div class="chain-logo">Solana</div>
+            <div class="chain-logo">Cardano</div>
+            <div class="chain-logo">Polkadot</div>
+            <div class="chain-logo">Cosmos</div>
+        </div>
+    </section>
+
+    <section class="stats-section">
+        <div class="stats-container">
+            {% for stat in stats %}
+            <div class="stat-item">
+                <div class="stat-value">{{ stat.value }}</div>
+                <div class="stat-label">{{ stat.label }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="platform-section">
+        <h2>SAFE PLATFORM</h2>
+        <h3>Connecting DeFi to the Web3.0 Ecosystem</h3>
+        
+        <div class="features-grid">
+            {% for feature in features %}
+            <div class="feature-card">
+                <h4>{{ feature.title }}</h4>
+                <p>{{ feature.content }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="nft-section">
+        <div class="nft-content">
+            <h2>NFTAVERSE</h2>
+            <h3>Exploring the Future of Virtual Economies</h3>
+            <p>In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we</p>
+            <button class="explore-button">Explore Now</button>
+        </div>
+        
+        <div class="nft-features">
+            <div class="nft-feature">
+                <h4>Cutting-Edge DeFi</h4>
+                <p>Liquidity Pools</p>
+            </div>
+            <div class="nft-feature">
+                <h4>NFT Platform</h4>
+                <p>Instant Settlement</p>
+            </div>
+            <div class="nft-feature">
+                <h4>Passive Income</h4>
+                <p>Stable Returns</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="defi-section">
+        <h2>Powerful DeFi Technology</h2>
+        <p>desires to obtain pain of itself because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
+        
+        <div class="defi-options">
+            <div class="defi-option">Farming</div>
+            <div class="defi-option">Staking</div>
+            <div class="defi-option">Launchpad</div>
+            <div class="defi-option">Lending</div>
+        </div>
+    </section>
+
+    <section class="investors-section">
+        <h3>BACKED BY AWESOME Investors and Partners</h3>
+        <div class="investors-grid">
+            <div class="investor-logo">Tradeco</div>
+            <div class="investor-logo">Binance</div>
+            <div class="investor-logo">MetaMask</div>
+            <div class="investor-logo">DraomaK</div>
+            <div class="investor-logo">Toplag</div>
+            <div class="investor-logo">Crypha</div>
+            <div class="investor-logo">BullRun</div>
+            <div class="investor-logo">Radium</div>
+            <div class="investor-logo">CorePad</div>
+            <div class="investor-logo">Daoswap</div>
+            <div class="investor-logo">Portis</div>
+            <div class="investor-logo">CamTouc</div>
+            <div class="investor-logo">GemBox</div>
+            <div class="investor-logo">Tradeco</div>
+        </div>
+    </section>
+
+    <section class="articles-section">
+        <h3>LATEST ARTICLES</h3>
+        <h4>From Blog Post</h4>
+        
+        <div class="articles-grid">
+            {% for article in articles %}
+            <div class="article-card">
+                <h5>{{ article.title }}</h5>
+                <p>{{ article.content }}</p>
+                <div class="article-date">{{ article.date }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <a href="#" class="view-all">Explore all Articles →</a>
+    </section>
+
+    <section class="newsletter-section">
+        <h3>Stay connected Get Updates</h3>
+        <div class="newsletter-form">
+            <input type="email" placeholder="Email address">
+            <button>Subscribe</button>
+        </div>
+        
+        <div class="social-links">
+            <a href="#"><i class="fab fa-telegram"></i> TELEGRAM</a>
+            <a href="#"><i class="fab fa-twitter"></i> TWITTER</a>
+            <a href="#"><i class="fab fa-discord"></i> DISCORD</a>
+            <a href="#"><i class="fab fa-github"></i> GITHUB</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h4>ABOUT COMPANY</h4>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Ecosystem</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Latest Articles</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>PRODUCTS</h4>
+                <ul>
+                    <li><a href="#">Swap</a></li>
+                    <li><a href="#">Liquidity</a></li>
+                    <li><a href="#">Bridge</a></li>
+                    <li><a href="#">Governance</a></li>
+                    <li><a href="#">Farming Pools</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>DOCUMENTS</h4>
+                <ul>
+                    <li><a href="#">Whitepaper</a></li>
+                    <li><a href="#">Litepaper</a></li>
+                    <li><a href="#">Docs</a></li>
+                    <li><a href="#">FAQS</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>APPLICATIONS</h4>
+                <ul>
+                    <li><a href="#">Web App</a></li>
+                    <li><a href="#">Mobile App</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="copyright">© 2025 staco</div>
+            <div class="footer-links">
+                <a href="#">Terms of Service</a>
+                <a href="#">Privacy policy</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

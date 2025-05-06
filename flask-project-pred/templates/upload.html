@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockVision - Upload</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/upload.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">StockVision</div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('upload') }}" class="active">Upload</a></li>
+                <li><a href="#">Results</a></li>
+                <li><a href="#">History</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="upload-container">
+        <section class="upload-section">
+            <h2>Drag and drop images here</h2>
+            
+            <div class="upload-content">
+                <div class="upload-icon">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                </div>
+                <p>or</p>
+                <input type="file" id="fileInput" accept="image/*,.zip" multiple style="display: none;">
+                <button class="browse-button" onclick="document.getElementById('fileInput').click()">Browse</button>
+            </div>
+            
+            <div class="upload-info">
+                <p>We'll start a new thread for each image you upload so you can ask it questions immediately after.</p>
+                <p>If you upload a ZIP file, we'll extract the contents so you can ask about each individual file.</p>
+                <p>Large files may take a little longer to process, but don't worry - we'll let you know once it's ready.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Gestion du drag and drop
+        const uploadContent = document.querySelector('.upload-content');
+        const fileInput = document.getElementById('fileInput');
+        
+        uploadContent.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadContent.classList.add('dragover');
+        });
+        
+        uploadContent.addEventListener('dragleave', () => {
+            uploadContent.classList.remove('dragover');
+        });
+        
+        uploadContent.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadContent.classList.remove('dragover');
+            
+            if (e.dataTransfer.files.length) {
+                fileInput.files = e.dataTransfer.files;
+                handleFiles(fileInput.files);
+            }
+        });
+        
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length) {
+                handleFiles(fileInput.files);
+            }
+        });
+        
+        function handleFiles(files) {
+            console.log('Files to upload:', files);
+            // Ici vous ajouterez la logique pour envoyer les fichiers au serveur
+            alert(`${files.length} file(s) selected for upload`);
+        }
+    </script>
+</body>
+</html>

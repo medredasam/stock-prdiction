@@ -1,0 +1,77 @@
+/* Upload Page Specific Styles - Sans cadre */
+.upload-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.upload-section {
+    text-align: center;
+}
+
+.upload-section h2 {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #6c5ce7;
+}
+
+.upload-content {
+    margin-bottom: 30px;
+    transition: all 0.3s;
+}
+
+.upload-content.dragover {
+    color: #a29bfe;
+}
+
+.upload-icon {
+    font-size: 48px;
+    color: #6c5ce7;
+    margin-bottom: 20px;
+}
+
+.upload-content p {
+    margin: 15px 0;
+    color: #b2bec3;
+}
+
+.browse-button {
+    background: linear-gradient(90deg, #6c5ce7, #a29bfe);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.browse-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(108, 92, 231, 0.3);
+}
+
+.upload-info {
+    text-align: left;
+    color: #b2bec3;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.upload-info p {
+    margin-bottom: 15px;
+}
+
+/* Responsive styles for upload page */
+@media (max-width: 768px) {
+    .upload-container {
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+    
+    .upload-section h2 {
+        font-size: 24px;
+    }
+}

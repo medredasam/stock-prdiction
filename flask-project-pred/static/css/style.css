@@ -1,4 +1,116 @@
 /* Reset and base styles */
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #f7f9fc;
+    color: #333;
+}
+
+header {
+    background-color: #1e293b;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #38bdf8;
+}
+
+.upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+}
+
+.upload-section {
+    background-color: #fff;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.upload-section h2 {
+    margin-bottom: 1.5rem;
+    color: #1e293b;
+}
+
+.upload-content {
+    border: 2px dashed #38bdf8;
+    padding: 2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-content:hover {
+    background-color: #f0f9ff;
+}
+
+.upload-icon i {
+    font-size: 3rem;
+    color: #38bdf8;
+}
+
+.browse-button {
+    margin-top: 1rem;
+    padding: 0.6rem 1.5rem;
+    background-color: #38bdf8;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.browse-button:hover {
+    background-color: #0ea5e9;
+}
+
+.upload-info {
+    margin-top: 1.5rem;
+    color: #555;
+}
+
+.dragover {
+    background-color: #e0f2fe;
+}
+
+#result {
+    margin-top: 1.5rem;
+}
+
 * {
   margin: 0;
   padding: 0;

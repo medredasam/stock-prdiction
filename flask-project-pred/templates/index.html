@@ -7,13 +7,15 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <!-- Bootstrap 5 CSS -->
+     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
-<body>
-  <header>
-    <nav>
-        <div class="logo">StockVision</div>
+<body class="bg-gradient-to-b from-black via-[#6c5ce7] to-black text-white font-sans antialiased">
+  <header >
+    <nav  >
+        <div class="logo ">StockVision</div>
         <ul class="nav-links">
             <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
             <li><a href="{{ url_for('upload') }}" >Upload</a></li>
@@ -31,17 +33,15 @@
             <a href="{{ url_for('upload') }}"><button class="cta-button" >Try Now</button></a>
         </div>
     </section>
-
-
-    <section class="chains-section py-5 bg-light text-center">
+    <section class="chains-section text-center">
         <div class="container">
-          <h3 class="mb-5 fw-bold">HOW IT WORKS</h3>
+                  <h2 class="mb-5 fw-bold">HOW IT WORKS</h2>
           <div class="row g-4">
             
             <!-- Step 1 -->
             <div class="col-md-6 col-lg-3">
-              <div class="card h-100 shadow-sm border-0 bg-white rounded hover-shadow">
-                <div class="card-body py-4">
+              <div class="card h-100 shadow-sm border-0  rounded hover-shadow">
+                <div class="card-body py-4 defi-option">
                   <div class="mb-4 d-flex justify-content-center align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#0d6efd" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
                       <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z"/>
@@ -56,8 +56,8 @@
       
             <!-- Step 2 -->
             <div class="col-md-6 col-lg-3">
-              <div class="card h-100 shadow-sm border-0 bg-white rounded hover-shadow">
-                <div class="card-body py-4">
+              <div class="card h-100 shadow-sm border-0 rounded hover-shadow">
+                <div class="card-body py-4 defi-option">
                   <div class="mb-4 d-flex justify-content-center align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#198754" class="bi bi-robot" viewBox="0 0 16 16">
                       <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5M3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.6 26.6 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.93.93 0 0 1-.765.935c-.845.147-2.34.346-4.235.346s-3.39-.2-4.235-.346A.93.93 0 0 1 3 9.219z"/>
@@ -72,8 +72,8 @@
       
             <!-- Step 3 -->
             <div class="col-md-6 col-lg-3">
-              <div class="card h-100 shadow-sm border-0 bg-white rounded hover-shadow">
-                <div class="card-body py-4">
+              <div class="card h-100 shadow-sm border-0 rounded hover-shadow">
+                <div class="card-body py-4 defi-option">
                   <div class="mb-4 d-flex justify-content-center align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#ffc107" class="bi bi-check-all" viewBox="0 0 16 16">
                       <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486z"/>
@@ -87,8 +87,8 @@
       
             <!-- Step 4 -->
             <div class="col-md-6 col-lg-3">
-              <div class="card h-100 shadow-sm border-0 bg-white rounded hover-shadow">
-                <div class="card-body py-4">
+              <div class="card h-100 shadow-sm border-0 rounded hover-shadow">
+                <div class="card-body py-4 defi-option">
                   <div class="mb-4 d-flex justify-content-center align-items-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#dc3545" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
                       <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
@@ -103,30 +103,7 @@
           </div>
         </div>
       </section>
-      
-    <section class="nft-section">
-        <div class="nft-content">
-            <h2>NFTAVERSE</h2>
-            <h3>Exploring the Future of Virtual Economies</h3>
-            <p>In a free hour, when our power of choice is untrammelled and when nothing prevents our being able to do what we</p>
-            <button class="explore-button">Explore Now</button>
-        </div>
-        
-        <div class="nft-features">
-            <div class="nft-feature">
-                <h4>Cutting-Edge DeFi</h4>
-                <p>Liquidity Pools</p>
-            </div>
-            <div class="nft-feature">
-                <h4>NFT Platform</h4>
-                <p>Instant Settlement</p>
-            </div>
-            <div class="nft-feature">
-                <h4>Passive Income</h4>
-                <p>Stable Returns</p>
-            </div>
-        </div>
-    </section>
+
 
     <section class="defi-section">
         <h2>Powerful DeFi Technology</h2>
@@ -138,43 +115,6 @@
             <div class="defi-option">Launchpad</div>
             <div class="defi-option">Lending</div>
         </div>
-    </section>
-
-    <section class="investors-section">
-        <h3>BACKED BY AWESOME Investors and Partners</h3>
-        <div class="investors-grid">
-            <div class="investor-logo">Tradeco</div>
-            <div class="investor-logo">Binance</div>
-            <div class="investor-logo">MetaMask</div>
-            <div class="investor-logo">DraomaK</div>
-            <div class="investor-logo">Toplag</div>
-            <div class="investor-logo">Crypha</div>
-            <div class="investor-logo">BullRun</div>
-            <div class="investor-logo">Radium</div>
-            <div class="investor-logo">CorePad</div>
-            <div class="investor-logo">Daoswap</div>
-            <div class="investor-logo">Portis</div>
-            <div class="investor-logo">CamTouc</div>
-            <div class="investor-logo">GemBox</div>
-            <div class="investor-logo">Tradeco</div>
-        </div>
-    </section>
-
-    <section class="articles-section">
-        <h3>LATEST ARTICLES</h3>
-        <h4>From Blog Post</h4>
-        
-        <div class="articles-grid">
-            {% for article in articles %}
-            <div class="article-card">
-                <h5>{{ article.title }}</h5>
-                <p>{{ article.content }}</p>
-                <div class="article-date">{{ article.date }}</div>
-            </div>
-            {% endfor %}
-        </div>
-        
-        <a href="#" class="view-all">Explore all Articles →</a>
     </section>
 
     <section class="newsletter-section">

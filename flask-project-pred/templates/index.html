@@ -18,8 +18,7 @@
         <div class="logo ">StockVision</div>
         <ul class="nav-links">
             <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
-            <li><a href="{{ url_for('upload') }}" >Upload</a></li>
-            <li><a href="#">Results</a></li>
+            <li><a href="{{ url_for('backtest') }}">Backtest</a></li>
             <li><a href="#">History</a></li>
         </ul>
     </nav>
@@ -30,7 +29,6 @@
             <h1>Unlock the power of stock prediction</h1>
             <h2>Upload your chart. Let our AI tell you the next move.</h2>
             <p>Exploring the Opportunities and Challenges</p>
-            <a href="{{ url_for('upload') }}"><button class="cta-button" >Try Now</button></a>
         </div>
     </section>
     <section class="chains-section text-center">

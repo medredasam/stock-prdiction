@@ -154,10 +154,13 @@
         <!-- Window buttons -->
         <div class="space-y-4">
           <form method="POST" action="/run-backtest">
+           
+
+         
           <button
             class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition text-gray-300 py-3 mb-4  rounded-xl font-semibold flex items-center justify-center space-x-3"
           type="submit" name="model_name" value="model_8">
-            <span>Window 1 : 8 Candles</span>
+            <span>Window 3 : 8 Candles</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
               <path
                 d="M17 9V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8a2 2 0 00-2 2v1H5a2 2 0 00-2 2v2H1v6h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2V9h-2zm-2 5H5v-4h10v4z"
@@ -168,7 +171,7 @@
           <button
             class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition mb-4  text-gray-300 py-3 rounded-xl font-semibold flex items-center justify-center space-x-3"
          type="submit" name="model_name" value="model_10">
-            <span>Window 2 : 10 Candles</span>
+            <span>Window 4 : 10 Candles</span>
 
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
               <path
@@ -182,7 +185,7 @@
 
   
           type="submit" name="model_name" value="model_20">
-            <span>Window 3 : 20 Candles</span>
+            <span>Window 5 : 20 Candles</span>
 
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
               <path
@@ -211,110 +214,48 @@
       </aside>
     </div>
   </div>
-  <style>
-    /* Premier spinner (coin flip) */
-    .loader-coin {
-      transform: translateZ(1px);
-    }
-    .loader-coin:after {
-      content: '$';
-      display: inline-block;
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      text-align: center;
-      line-height:40px;
-      font-size: 32px;
-      font-weight: bold;
-      background: #FFD700;
-      color: #DAA520;
-      border: 4px double;
-      box-sizing: border-box;
-      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, .1);
-      animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-    }
+  <div id="loading-overlay" class="loading-overlay" style="display: none;">
+  <div class="spinner-container">
+    <span class="loader-coin"></span>
+    <span class="loader-text"></span>
+  </div>
+  <!-- <div class="loading-message">Préparation des données...</div> -->
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Gestion des liens de navigation
+    const navLinks = document.querySelectorAll('nav a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        if (!this.getAttribute('href').startsWith('#')) {
+          document.getElementById('loading-overlay').style.display = 'flex';
+        }
+      });
+    });
     
-    /* Deuxième spinner (text animation) */
-    .loader-text {
-      font-size: 48px;
-      color: #FFF;
-      display: inline-block;
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: 400;
-      position: relative;
-      margin-left: 20px;
-    }
-    .loader-text:before {
-      content: '';
-      animation: 5s print linear alternate infinite;
-    }
-    .loader-text:after {
-      content: '';
-      position: absolute;
-      right: -4px;
-      top: 50%;
-      transform: translatey(-45%);
-      width: 2px;
-      height: 1.3em;
-      background: currentColor;
-      opacity: 0.8;
-      animation: 1s blink steps(2) infinite;
-    }
+    // Gestion des soumissions de formulaire
+    const forms = document.querySelectorAll('form');
+    forms.forEach(form => {
+      form.addEventListener('submit', function() {
+        document.getElementById('loading-overlay').style.display = 'flex';
+      });
+    });
     
-    /* Animation keyframes */
-    @keyframes coin-flip {
-      0%, 100% { animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5); }
-      0% { transform: rotateY(0deg); }
-      50% { transform: rotateY(1800deg); animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1); }
-      100% { transform: rotateY(3600deg); }
+    // Pour la page de résultats
+    const backtestBtn = document.querySelector('a[href="/backtest"]');
+    if (backtestBtn) {
+      backtestBtn.addEventListener('click', function(e) {
+        document.getElementById('loading-overlay').style.display = 'flex';
+      });
     }
-    
-    @keyframes blink {
-      0% { visibility: hidden; }
-      100% { visibility: visible; }
-    }
-    
-    @keyframes print {
-      0% { content: 'L'; }
-      10% { content: 'Lo'; }
-      20% { content: 'Loa'; }
-      30% { content: 'Load'; }
-      40% { content: 'Loadi'; }
-      50% { content: 'Loadin'; }
-      60% { content: 'Loading'; }
-      70% { content: 'Loading.'; }
-      80% { content: 'Loading..'; }
-      90%, 100% { content: 'Loading...'; }
-    }
-    
-    /* Overlay style */
-    .loading-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-    }
-    
-    .spinner-container {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    
-    .loading-message {
-      color: white;
-      font-size: 1.5rem;
-      margin-top: 20px;
-      font-family: 'Inter', sans-serif;
-    }
-</style>
+  });
+  
+  // Cacher quand la page est chargée
+  window.addEventListener('load', function() {
+    document.getElementById('loading-overlay').style.display = 'none';
+  });
+</script>
 </body>
 
 </html>

@@ -1,186 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DeFi Web3 Platform</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<!-- Bootstrap 5 CSS -->
-     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NVIEA Backtest & Prediction</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-b from-black via-[#6c5ce7] to-black text-white font-sans antialiased">
-  <header >
-    <nav  >
-        <div class="logo ">StockVision</div>
-        <ul class="nav-links">
-            <li><a href="{{ url_for('home') }}" class="active">Home</a></li>
-            <li><a href="{{ url_for('backtest') }}">Backtest</a></li>
-            <li><a href="#">History</a></li>
-        </ul>
-    </nav>
-</header>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Unlock the power of stock prediction</h1>
-            <h2>Upload your chart. Let our AI tell you the next move.</h2>
-            <p>Exploring the Opportunities and Challenges</p>
-        </div>
-    </section>
-    <section class="chains-section text-center">
-        <div class="container">
-                  <h2 class="mb-5 fw-bold">HOW IT WORKS</h2>
-          <div class="row g-4">
-            
-            <!-- Step 1 -->
-            <div class="col-md-6 col-lg-3">
-              <div class="card h-100 shadow-sm border-0  rounded hover-shadow">
-                <div class="card-body py-4 defi-option">
-                  <div class="mb-4 d-flex justify-content-center align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#0d6efd" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">
-                      <path d="M8.5 11.5a.5.5 0 0 1-1 0V7.707L6.354 8.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1-.708.708L8.5 7.707z"/>
-                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
-                    </svg>
-                  </div>
-                  <h5 class="card-title">Upload Your Chart</h5>
-                  <p class="card-text text-muted">Drag & drop or select a trading chart image.</p>
-                </div>
-              </div>
-            </div>
-      
-            <!-- Step 2 -->
-            <div class="col-md-6 col-lg-3">
-              <div class="card h-100 shadow-sm border-0 rounded hover-shadow">
-                <div class="card-body py-4 defi-option">
-                  <div class="mb-4 d-flex justify-content-center align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#198754" class="bi bi-robot" viewBox="0 0 16 16">
-                      <path d="M6 12.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5M3 8.062C3 6.76 4.235 5.765 5.53 5.886a26.6 26.6 0 0 0 4.94 0C11.765 5.765 13 6.76 13 8.062v1.157a.93.93 0 0 1-.765.935c-.845.147-2.34.346-4.235.346s-3.39-.2-4.235-.346A.93.93 0 0 1 3 9.219z"/>
-                      <path d="M8.5 1.866a1 1 0 1 0-1 0V3h-2A4.5 4.5 0 0 0 1 7.5V8a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1v1a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-1a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v-.5A4.5 4.5 0 0 0 10.5 3h-2z"/>
-                    </svg>
-                  </div>
-                  <h5 class="card-title">AI Analyzes the Trend</h5>
-                  <p class="card-text text-muted">Our deep learning model processes the chart to detect patterns.</p>
-                </div>
-              </div>
-            </div>
-      
-            <!-- Step 3 -->
-            <div class="col-md-6 col-lg-3">
-              <div class="card h-100 shadow-sm border-0 rounded hover-shadow">
-                <div class="card-body py-4 defi-option">
-                  <div class="mb-4 d-flex justify-content-center align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#ffc107" class="bi bi-check-all" viewBox="0 0 16 16">
-                      <path d="M8.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L2.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093L8.95 4.992zm-.92 5.14.92.92a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 1 0-1.091-1.028L9.477 9.417l-.485-.486z"/>
-                    </svg>
-                  </div>
-                  <h5 class="card-title">Get Instant Prediction</h5>
-                  <p class="card-text text-muted">Find out whether the trend is Up or Down – in seconds.</p>
-                </div>
-              </div>
-            </div>
-      
-            <!-- Step 4 -->
-            <div class="col-md-6 col-lg-3">
-              <div class="card h-100 shadow-sm border-0 rounded hover-shadow">
-                <div class="card-body py-4 defi-option">
-                  <div class="mb-4 d-flex justify-content-center align-items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="#dc3545" class="bi bi-graph-up-arrow" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
-                    </svg>
-                  </div>
-                  <h5 class="card-title">Make Informed Trades</h5>
-                  <p class="card-text text-muted">Use insights to make smarter trading decisions.</p>
-                </div>
-              </div>
-            </div>
-      
-          </div>
-        </div>
-      </section>
+<body class="bg-[#101010] text-white min-h-screen flex flex-col">
+  <div class="max-w-6xl mx-auto p-6 flex flex-col min-h-screen">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-12">
+      <h1 class="text-3xl font-bold text-lime-400 cursor-default">NVIEA Analyzer</h1>
+      <nav class="space-x-6 text-gray-300">
+        <a  href="{{ url_for('home') }}" class="hover:text-lime-400 transition">Home</a>
+        <a href="{{ url_for('backtest') }}" class="hover:text-lime-400 transition">Backtest</a>
+        <a href="#get-started" class="hover:text-lime-400 transition">Get Started</a>
+      </nav>
+    </header>
 
-
-    <section class="defi-section">
-        <h2>Powerful DeFi Technology</h2>
-        <p>desires to obtain pain of itself because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure.</p>
-        
-        <div class="defi-options">
-            <div class="defi-option">Farming</div>
-            <div class="defi-option">Staking</div>
-            <div class="defi-option">Launchpad</div>
-            <div class="defi-option">Lending</div>
+    <!-- Hero Section -->
+    <section class="flex flex-col md:flex-row items-center gap-10 mb-20">
+      <div class="flex-1 space-y-6">
+        <h2 class="text-5xl font-extrabold leading-tight text-white">
+          Backtest and Predict NVIEA Stock <br />with Confidence
+        </h2>
+        <p class="text-gray-300 text-lg max-w-xl">
+          Explore 365 days of candle chart data, select your trading window, and receive tailored prediction analysis backed by powerful backtesting tools.
+        </p>
+        <a href="/backtest" class="inline-block bg-lime-400 text-black px-8 py-3 rounded-xl font-semibold hover:bg-lime-500 transition">
+          Start Backtesting →
+        </a>
+      </div>
+      <div class="flex-1">
+        <!-- Chart placeholder styled similarly to your example -->
+        <div class="h-64 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 flex items-end p-6 relative">
+          <div class="absolute top-4 left-6 text-white font-bold text-xl">NVIEA</div>
+          <div class="bg-black text-lime-400 px-3 py-1 rounded-lg font-mono text-sm">365 Days Candles</div>
+          <svg class="absolute right-6 bottom-6 w-24 h-24 opacity-30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 17v-6a1 1 0 011-1h2m4 7v-4a1 1 0 011-1h2m4 5v-10a1 1 0 011-1h2" />
+          </svg>
         </div>
+      </div>
     </section>
 
-    <section class="newsletter-section">
-        <h3>Stay connected Get Updates</h3>
-        <div class="newsletter-form">
-            <input type="email" placeholder="Email address">
-            <button>Subscribe</button>
+    <!-- Features Section -->
+    <section id="features" class="mb-20">
+      <h3 class="text-3xl font-bold mb-8 text-lime-400">Key Features</h3>
+      <div class="grid md:grid-cols-3 gap-12 text-gray-300">
+        <div class="bg-[#1a1a1a] rounded-2xl p-6 shadow-lg hover:shadow-lime-400 transition cursor-default">
+          <h4 class="text-xl font-semibold mb-3 text-white">365-Day Candle Charts</h4>
+          <p>Visualize detailed daily candlestick data for NVIEA to understand market trends and patterns clearly.</p>
         </div>
-        
-        <div class="social-links">
-            <a href="#"><i class="fab fa-telegram"></i> TELEGRAM</a>
-            <a href="#"><i class="fab fa-twitter"></i> TWITTER</a>
-            <a href="#"><i class="fab fa-discord"></i> DISCORD</a>
-            <a href="#"><i class="fab fa-github"></i> GITHUB</a>
+        <div class="bg-[#1a1a1a] rounded-2xl p-6 shadow-lg hover:shadow-lime-400 transition cursor-default">
+          <h4 class="text-xl font-semibold mb-3 text-white">Window Selection</h4>
+          <p>Choose from 3 dynamic trading windows tailored to your strategy to refine backtesting accuracy.</p>
         </div>
+        <div class="bg-[#1a1a1a] rounded-2xl p-6 shadow-lg hover:shadow-lime-400 transition cursor-default">
+          <h4 class="text-xl font-semibold mb-3 text-white">Predictive Backtesting</h4>
+          <p>Get predictive insights based on selected windows and backtest parameters to optimize your trades.</p>
+        </div>
+      </div>
     </section>
 
-    <footer>
-        <div class="footer-columns">
-            <div class="footer-column">
-                <h4>ABOUT COMPANY</h4>
-                <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Ecosystem</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Latest Articles</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h4>PRODUCTS</h4>
-                <ul>
-                    <li><a href="#">Swap</a></li>
-                    <li><a href="#">Liquidity</a></li>
-                    <li><a href="#">Bridge</a></li>
-                    <li><a href="#">Governance</a></li>
-                    <li><a href="#">Farming Pools</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h4>DOCUMENTS</h4>
-                <ul>
-                    <li><a href="#">Whitepaper</a></li>
-                    <li><a href="#">Litepaper</a></li>
-                    <li><a href="#">Docs</a></li>
-                    <li><a href="#">FAQS</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h4>APPLICATIONS</h4>
-                <ul>
-                    <li><a href="#">Web App</a></li>
-                    <li><a href="#">Mobile App</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <div class="copyright">© 2025 staco</div>
-            <div class="footer-links">
-                <a href="#">Terms of Service</a>
-                <a href="#">Privacy policy</a>
-                <a href="#">Security</a>
-            </div>
-        </div>
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="mb-20 max-w-4xl mx-auto text-gray-300">
+      <h3 class="text-3xl font-bold mb-8 text-lime-400 text-center">How It Works</h3>
+      <ol class="list-decimal list-inside space-y-6 text-lg">
+        <li>
+          <strong>View 365 Days Candle Chart</strong> of NVIEA stock with detailed price action and volume data.
+        </li>
+        <li>
+          <strong>Select a Trading Window</strong> from three options tailored for short, medium, or long-term analysis.
+        </li>
+        <li>
+          <strong>Get Predictions & Backtest Results</strong> based on your chosen window with parameters displayed for transparency.
+        </li>
+      </ol>
+    </section>
+
+    <!-- Call to Action -->
+    <section id="get-started" class="text-center">
+      <h3 class="text-3xl font-bold mb-6 text-lime-400">Ready to dive in?</h3>
+      <a href="/backtest" class="inline-block bg-lime-400 text-black px-10 py-4 rounded-3xl font-bold text-xl hover:bg-lime-500 transition">
+        Go to Backtest Page →
+      </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="mt-auto pt-10 text-gray-500 text-sm text-center">
+      &copy; 2025 NVIEA Analyzer. All rights reserved.
     </footer>
+  </div>
 </body>
+
 </html>

@@ -72,7 +72,7 @@ def backtest():
         plot_bgcolor="rgba(25,25,25,0.7)",  # slightly lighter black with opacity for blur effect
         font=dict(color="#d6f17e", family="Inter, sans-serif"),
         hovermode="x unified",
-        margin=dict(l=40, r=40, t=60, b=40),
+        margin=dict(l=40, r=100, t=60, b=40),
     )
 
     backtest_html = pio.to_html(fig, full_html=False)

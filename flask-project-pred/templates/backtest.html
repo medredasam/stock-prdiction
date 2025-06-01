@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crypto Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NVIEA Backtest & Prediction</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -15,86 +14,96 @@
   </style>
 </head>
 
-<body class="bg-lime-100 text-white">
-  <div class="min-h-screen p-6 bg-[#101010] rounded-3xl max-w-7xl mx-auto shadow-xl">
+<body class="bg-[#101010] text-white min-h-screen flex flex-col">
+  <div class="max-w-6xl mx-auto p-6 flex flex-col min-h-screen">
     <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-xl font-bold text-white">LumaTrade</h1>
-      <div class="space-x-6 flex items-center">
-        <a href="#" class="text-gray-300 hover:text-white">Dashboard</a>
-        <a href="#" class="text-gray-300 hover:text-white">Trade</a>
-        <a href="#" class="text-gray-300 hover:text-white">Market</a>
-        <button class="bg-lime-400 text-black font-semibold px-4 py-1 rounded-lg">Log in ↳</button>
-      </div>
-    </div>
+    <header class="flex justify-between items-center mb-12">
+      <h1 class="text-3xl font-bold text-lime-400 cursor-default">NVIEA Analyzer</h1>
+      <nav class="space-x-6 text-gray-300">
+        <a href="{{ url_for('home') }}" class="hover:text-lime-400 transition">Home</a>
+        <a href="{{ url_for('backtest') }}" class="hover:text-lime-400 transition font-semibold underline decoration-lime-400">Backtest</a>
+        <a href="#get-started" class="hover:text-lime-400 transition">Get Started</a>
+      </nav>
+    </header>
 
-    <!-- Top section -->
-    <div class="flex flex-col lg:flex-row gap-8">
-      <!-- Left Side (Chart and Market Info) -->
-      <div class="w-full lg:w-2/3">
-
-
-        <div class="text-4xl font-bold">
+    <!-- Main content -->
+    <div class="flex flex-col lg:flex-row gap-10">
+      <!-- Left Side: Chart -->
+      <section class="lg:w-2/3 w-full">
+        <h2 class="text-4xl font-extrabold text-lime-400 mb-6">
           Graphique Tesla - 365 derniers jours
-        </div>
+        </h2>
 
-        <!-- Chart Container -->
-        <div class="my-6 p-4 bg-[#181818] rounded-2xl shadow-lg">
-          <div class="plotly-graph " >
-            {{ backtest_html|safe }}
+        <div class="bg-[#1a1a1a] rounded-2xl p-6 shadow-lg">
+          <div class="plotly-graph">
+            {{ backtest_html | safe }}
           </div>
         </div>
+      </section>
 
-        <!-- Optional Price Display -->
+      <!-- Right Side: Window selector and info -->
+      <aside class="lg:w-1/3 w-full bg-[#1a1a1a] rounded-2xl p-6 shadow-lg">
+        <h3 class="text-lg font-bold text-lime-400 mb-4 uppercase tracking-widest">
+          Choose a Window
+        </h3>
 
-      </div>
-
-      <!-- Right Side (Buy/Sell Panel) -->
-      <div class="w-full lg:w-1/3 bg-[#1a1a1a] p-6 rounded-2xl">
-        <div class="flex justify-between mb-4">
-          <button class="text-lime-400 font-bold">CHOOSE A WINDOW</button>
-        </div>
-
-        <!-- Buttons -->
-        <div class="space-y-3">
-          <button class="w-full bg-gray-700 text-white py-2 rounded-xl font-semibold flex items-center justify-center space-x-2">
+        <!-- Window buttons -->
+        <div class="space-y-4">
+          <button
+            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition text-gray-300 py-3 rounded-xl font-semibold flex items-center justify-center space-x-3"
+          >
             <span>Window 1</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M17 9V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8a2 2 0 00-2 2v1H5a2 2 0 00-2 2v2H1v6h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2V9h-2zm-2 5H5v-4h10v4z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M17 9V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8a2 2 0 00-2 2v1H5a2 2 0 00-2 2v2H1v6h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2V9h-2zm-2 5H5v-4h10v4z"
+              />
             </svg>
           </button>
 
-          <button class="w-full bg-gray-700 text-white py-2 rounded-xl font-semibold flex items-center justify-center space-x-2">
+          <button
+            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition text-gray-300 py-3 rounded-xl font-semibold flex items-center justify-center space-x-3"
+          >
             <span>Window 2</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M17 9V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8a2 2 0 00-2 2v1H5a2 2 0 00-2 2v2H1v6h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2V9h-2zm-2 5H5v-4h10v4z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M17 9V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8a2 2 0 00-2 2v1H5a2 2 0 00-2 2v2H1v6h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2V9h-2zm-2 5H5v-4h10v4z"
+              />
             </svg>
           </button>
 
-          <button class="w-full bg-gray-700 text-white py-2 rounded-xl font-semibold flex items-center justify-center space-x-2">
+          <button
+            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition text-gray-300 py-3 rounded-xl font-semibold flex items-center justify-center space-x-3"
+          >
             <span>Window 3</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M17 9V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8a2 2 0 00-2 2v1H5a2 2 0 00-2 2v2H1v6h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2V9h-2zm-2 5H5v-4h10v4z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M17 9V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8a2 2 0 00-2 2v1H5a2 2 0 00-2 2v2H1v6h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2V9h-2zm-2 5H5v-4h10v4z"
+              />
             </svg>
           </button>
         </div>
 
         <!-- Balance Info -->
-        <div class="mt-6 bg-gray-800 p-4 rounded-xl text-sm">
-          <div class="flex justify-between">
+        <div
+          class="mt-8 bg-[#222222] p-5 rounded-xl text-gray-300 text-sm leading-relaxed"
+        >
+          <div class="flex justify-between mb-2">
             <span>Available Balance</span>
             <span class="text-green-400 font-semibold">+7.45%</span>
           </div>
-          <div class="text-xl font-bold mt-1">293.0187 ETH</div>
-          <div class="text-gray-500 mt-1 text-xs">
- Choose Your Trading Window
-Select the trading window you wish to view or interact with. Each window represents a different preset or strategy for analyzing Tesla's performance over the past year. This allows you to easily switch perspectives, compare scenarios, and make informed decisions before taking action.
-          </div>
+          <div class="text-xl font-bold text-white mb-2">293.0187 ETH</div>
+          <p>
+            Choose Your Trading Window.<br />
+            Select the trading window you wish to view or interact with. Each window
+            represents a different preset or strategy for analyzing Tesla's
+            performance over the past year. This allows you to easily switch
+            perspectives, compare scenarios, and make informed decisions before
+            taking action.
+          </p>
         </div>
-      </div>
+      </aside>
     </div>
   </div>
 </body>
-
 
 </html>

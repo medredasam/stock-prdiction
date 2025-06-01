@@ -1,106 +1,318 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
 <head>
-    <title>Résultats du Backtest</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .graph-container {
-            height: 700px;
-            width: 100%;
-        }
-        .stat-card {
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Résultats du Backtest</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+  <style>
+    /* Premier spinner (coin flip) */
+    .loader-coin {
+      transform: translateZ(1px);
+    }
+    .loader-coin:after {
+      content: '$';
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      text-align: center;
+      line-height:40px;
+      font-size: 32px;
+      font-weight: bold;
+      background: #FFD700;
+      color: #DAA520;
+      border: 4px double;
+      box-sizing: border-box;
+      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, .1);
+      animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    
+    /* Deuxième spinner (text animation) */
+    .loader-text {
+      font-size: 48px;
+      color: #FFF;
+      display: inline-block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 400;
+      position: relative;
+      margin-left: 20px;
+    }
+    .loader-text:before {
+      content: '';
+      animation: 5s print linear alternate infinite;
+    }
+    .loader-text:after {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: 50%;
+      transform: translatey(-45%);
+      width: 2px;
+      height: 1.3em;
+      background: currentColor;
+      opacity: 0.8;
+      animation: 1s blink steps(2) infinite;
+    }
+    
+    /* Animation keyframes */
+    @keyframes coin-flip {
+      0%, 100% { animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5); }
+      0% { transform: rotateY(0deg); }
+      50% { transform: rotateY(1800deg); animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1); }
+      100% { transform: rotateY(3600deg); }
+    }
+    
+    @keyframes blink {
+      0% { visibility: hidden; }
+      100% { visibility: visible; }
+    }
+    
+    @keyframes print {
+      0% { content: 'L'; }
+      10% { content: 'Lo'; }
+      20% { content: 'Loa'; }
+      30% { content: 'Load'; }
+      40% { content: 'Loadi'; }
+      50% { content: 'Loadin'; }
+      60% { content: 'Loading'; }
+      70% { content: 'Loading.'; }
+      80% { content: 'Loading..'; }
+      90%, 100% { content: 'Loading...'; }
+    }
+    
+    /* Overlay style */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .spinner-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .loading-message {
+      color: white;
+      font-size: 1.5rem;
+      margin-top: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+</style>
 </head>
-<body>
-    <div class="container mt-4">
-        <h1 class="mb-4">Résultats du Backtest</h1>
-        
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        Statistiques
-                    </div>
-                    <div class="card-body">
-                        <div class="stat-card">
-                            <h5>Return Final</h5>
-                            <h3 class="{{ 'text-success' if results.final_return >= 0 else 'text-danger' }}">
-                                {{ "%.2f"|format(results.final_return) }}%
-                            </h3>
-                        </div>
 
-                        <div class="stat-card">
-                            <h5>Nombre de Trades</h5>
-                            <h3>{{ results.num_trades }}</h3>
-                        </div>
+<body class="bg-[#101010] text-white min-h-screen p-6">
+  <div class="max-w-7xl mx-auto">
+        <!-- Header -->
+    <header class="flex justify-between items-center mb-12">
+      <h1 class="text-3xl font-bold text-lime-400 cursor-default">NVIEA Analyzer</h1>
+      <nav class="space-x-6 text-gray-300">
+        <a href="{{ url_for('home') }}" class="hover:text-lime-400 transition">Home</a>
+        <a href="{{ url_for('backtest') }}" class="hover:text-lime-400 transition font-semibold underline decoration-lime-400">Backtest</a>
+        <a href="#get-started" class="hover:text-lime-400 transition">Get Started</a>
+      </nav>
+    </header>
+    <h1 class="text-3xl font-extrabold mb-8">Backtest Results</h1>
 
-                        <div class="stat-card">
-                            <h5>Taux de Réussite</h5>
-                            <h3>{{ "%.2f"|format(results.win_rate) }}%</h3>
-                        </div>
-
-                        <div class="stat-card">
-                            <h5>Maximum Drawdown</h5>
-                            <h3>{{ "%.2f"|format(results.max_drawdown) }}%</h3>
-                        </div>
-
-                        <div class="stat-card">
-                            <h5>Profit Factor</h5>
-                            <h3>{{ "%.2f"|format(results.profit_factor) }}</h3>
-                        </div>
-
-                        <div class="stat-card">
-                            <h5>Ratio de Sharpe</h5>
-                            <h3>{{ "%.2f"|format(results.sharpe_ratio) }}</h3>
-                        </div>
-
-                        <div class="stat-card">
-                            <h5>Capital Maximum</h5>
-                            <h3>{{ "%.2f"|format(results.capital_max) }}$</h3>
-                        </div>
-                         <div class="stat-card">
-                            <h5>Capital Minimum</h5>
-                            <h3>{{ "%.2f"|format(results.capital_min) }}$</h3>
-                        </div>
-
-                        <div class="stat-card">
-                            <h5>Dernière Prédiction</h5>
-                            <h3>{{ results.last_prediction.signal }}</h3>
-                            <h3>{{ results.last_prediction.equity }}</h3>
-                        </div>
-
-                        <div class="stat-card">
-                            <h5>Date de la Dernière Prédiction</h5>
-                            <h3>{{ results.last_prediction.date }}</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header bg-primary text-white">
-                        Graphique des Résultats
-                    </div>
-                    <div class="card-body">
-                        <div class="graph-container">
-                            {{ results.plot_html|safe }}
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+             <!-- Graphique -->
+      <div class="lg:col-span-2">
+        <div class="bg-[#1a1a1a] p-6 rounded-2xl shadow-lg h-full">
+          <h3 class="text-xl font-semibold text-lime-400 mb-4">Graphique d’Évolution</h3>
+          <div class="overflow-x-auto">
+            {{ results.plot_html | safe }}
+          </div>
+        </div>
+      </div>
+      <!-- Statistiques -->
+      <div class="space-y-4">
+        {% set is_positive = results.final_return >= 0 %}
+            <!-- Bouton Retour -->
+    <div class="mt-8">
+      <a href="/backtest"
+        class="inline-block px-6 py-3 bg-[#222222] hover:bg-lime-400 hover:text-black text-gray-300 rounded-xl font-semibold transition">
+        Nouveau Backtest
+      </a>
+    </div>
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Return Final</h5>
+          <p class="text-2xl font-bold {{ 'text-green-400' if is_positive else 'text-red-500' }}">
+            {{ "%.2f"|format(results.final_return) }}%
+          </p>
         </div>
 
-        <div class="mt-4">
-            <a href="/backtest" class="btn btn-secondary">Nouveau Backtest</a>
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Nombre de Trades</h5>
+          <p class="text-2xl font-bold">{{ results.num_trades }}</p>
         </div>
+
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Taux de Réussite</h5>
+          <p class="text-2xl font-bold text-green-400">{{ "%.2f"|format(results.win_rate) }}%</p>
+        </div>
+
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Maximum Drawdown</h5>
+          <p class="text-2xl font-bold text-red-400">{{ "%.2f"|format(results.max_drawdown) }}%</p>
+        </div>
+
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Profit Factor</h5>
+          <p class="text-2xl font-bold">{{ "%.2f"|format(results.profit_factor) }}</p>
+        </div>
+
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Ratio de Sharpe</h5>
+          <p class="text-2xl font-bold">{{ "%.2f"|format(results.sharpe_ratio) }}</p>
+        </div>
+
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Capital Maximum</h5>
+          <p class="text-2xl font-bold">{{ "%.2f"|format(results.capital_max) }} $</p>
+        </div>
+
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Capital Minimum</h5>
+          <p class="text-2xl font-bold">{{ "%.2f"|format(results.capital_min) }} $</p>
+        </div>
+
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Dernière Prédiction</h5>
+          <p class="text-xl font-semibold text-lime-400">{{ results.last_prediction.signal }}</p>
+          <p class="text-lg font-bold">{{ results.last_prediction.equity }}</p>
+        </div>
+
+        <div class="bg-[#1a1a1a] p-4 rounded-xl shadow-lg">
+          <h5 class="text-gray-400 text-sm uppercase">Date de la Dernière Prédiction</h5>
+          <p class="text-lg font-bold">{{ results.last_prediction.date }}</p>
+        </div>
+      </div>
+
+ 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  </div>
+  <style>
+    /* Premier spinner (coin flip) */
+    .loader-coin {
+      transform: translateZ(1px);
+    }
+    .loader-coin:after {
+      content: '$';
+      display: inline-block;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      text-align: center;
+      line-height:40px;
+      font-size: 32px;
+      font-weight: bold;
+      background: #FFD700;
+      color: #DAA520;
+      border: 4px double;
+      box-sizing: border-box;
+      box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, .1);
+      animation: coin-flip 4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+    }
+    
+    /* Deuxième spinner (text animation) */
+    .loader-text {
+      font-size: 48px;
+      color: #FFF;
+      display: inline-block;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 400;
+      position: relative;
+      margin-left: 20px;
+    }
+    .loader-text:before {
+      content: '';
+      animation: 5s print linear alternate infinite;
+    }
+    .loader-text:after {
+      content: '';
+      position: absolute;
+      right: -4px;
+      top: 50%;
+      transform: translatey(-45%);
+      width: 2px;
+      height: 1.3em;
+      background: currentColor;
+      opacity: 0.8;
+      animation: 1s blink steps(2) infinite;
+    }
+    
+    /* Animation keyframes */
+    @keyframes coin-flip {
+      0%, 100% { animation-timing-function: cubic-bezier(0.5, 0, 1, 0.5); }
+      0% { transform: rotateY(0deg); }
+      50% { transform: rotateY(1800deg); animation-timing-function: cubic-bezier(0, 0.5, 0.5, 1); }
+      100% { transform: rotateY(3600deg); }
+    }
+    
+    @keyframes blink {
+      0% { visibility: hidden; }
+      100% { visibility: visible; }
+    }
+    
+    @keyframes print {
+      0% { content: 'L'; }
+      10% { content: 'Lo'; }
+      20% { content: 'Loa'; }
+      30% { content: 'Load'; }
+      40% { content: 'Loadi'; }
+      50% { content: 'Loadin'; }
+      60% { content: 'Loading'; }
+      70% { content: 'Loading.'; }
+      80% { content: 'Loading..'; }
+      90%, 100% { content: 'Loading...'; }
+    }
+    
+    /* Overlay style */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    
+    .spinner-container {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .loading-message {
+      color: white;
+      font-size: 1.5rem;
+      margin-top: 20px;
+      font-family: 'Inter', sans-serif;
+    }
+</style>
 </body>
+
 </html>

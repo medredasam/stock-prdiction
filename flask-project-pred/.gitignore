@@ -7,8 +7,6 @@ __pycache__/
 .env
 
 *.keras
-<<<<<<< HEAD
-=======
 models/
->>>>>>> 76b62ad4c44902e87a0f10a2e9a2e6325138a2a9
+
 

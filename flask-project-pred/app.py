@@ -15,6 +15,7 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+
 @app.route('/backtest')
 def backtest():
     # --- Lecture des données ---
@@ -49,6 +50,7 @@ def backtest():
     backtest_html = pio.to_html(fig, full_html=False)
 
     return render_template("backtest.html", backtest_html=backtest_html)
+
 
 
     
@@ -115,6 +117,7 @@ def run_backtest():
         return render_template("error.html", message=str(e))
 
     
+
 
 
 if __name__ == '__main__':

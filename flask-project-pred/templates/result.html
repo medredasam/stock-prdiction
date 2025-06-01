@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultats du Backtest</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .graph-container {
+            height: 700px;
+            width: 100%;
+        }
+        .stat-card {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="mb-4">Résultats du Backtest</h1>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        Statistiques
+                    </div>
+                    <div class="card-body">
+                        <div class="stat-card">
+                            <h5>Return Final</h5>
+                            <h3 class="{{ 'text-success' if results.final_return >= 0 else 'text-danger' }}">
+                                {{ "%.2f"|format(results.final_return) }}%
+                            </h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <h5>Nombre de Trades</h5>
+                            <h3>{{ results.num_trades }}</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <h5>Taux de Réussite</h5>
+                            <h3>{{ "%.2f"|format(results.win_rate) }}%</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <h5>Maximum Drawdown</h5>
+                            <h3>{{ "%.2f"|format(results.max_drawdown) }}%</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <h5>Profit Factor</h5>
+                            <h3>{{ "%.2f"|format(results.profit_factor) }}</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <h5>Ratio de Sharpe</h5>
+                            <h3>{{ "%.2f"|format(results.sharpe_ratio) }}</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <h5>Capital Maximum</h5>
+                            <h3>{{ "%.2f"|format(results.capital_max) }}$</h3>
+                        </div>
+                         <div class="stat-card">
+                            <h5>Capital Minimum</h5>
+                            <h3>{{ "%.2f"|format(results.capital_min) }}$</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <h5>Dernière Prédiction</h5>
+                            <h3>{{ results.last_prediction.signal }}</h3>
+                            <h3>{{ results.last_prediction.equity }}</h3>
+                        </div>
+
+                        <div class="stat-card">
+                            <h5>Date de la Dernière Prédiction</h5>
+                            <h3>{{ results.last_prediction.date }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        Graphique des Résultats
+                    </div>
+                    <div class="card-body">
+                        <div class="graph-container">
+                            {{ results.plot_html|safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="/backtest" class="btn btn-secondary">Nouveau Backtest</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

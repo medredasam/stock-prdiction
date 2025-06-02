@@ -18,7 +18,7 @@
   <div class="max-w-6xl mx-auto p-6 flex flex-col min-h-screen">
     <!-- Header -->
     <header class="flex justify-between items-center mb-12">
-      <h1 class="text-3xl font-bold text-lime-400 cursor-default">NVIEA Analyzer</h1>
+      <h1 class="text-3xl font-bold text-lime-400 cursor-default">CandleCast</h1>
       <nav class="space-x-6 text-gray-300">
         <a  href="{{ url_for('home') }}" class="hover:text-lime-400 transition">Home</a>
         <a href="{{ url_for('backtest') }}" class="hover:text-lime-400 transition">Backtest</a>
@@ -26,34 +26,28 @@
       </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="flex flex-col md:flex-row items-center gap-10 mb-20">
-      <div class="flex-1 space-y-6">
-        <h2 class="text-5xl font-extrabold leading-tight text-white">
-          Backtest and Predict NVIEA Stock <br />with Confidence
-        </h2>
-        <p class="text-gray-300 text-lg max-w-xl">
-          Explore 365 days of candle chart data, select your trading window, and receive tailored prediction analysis backed by powerful backtesting tools.
-        </p>
-        <a href="/backtest" class="inline-block bg-lime-400 text-black px-8 py-3 rounded-xl font-semibold hover:bg-lime-500 transition">
-          Start Backtesting →
-        </a>
-      </div>
-      <div class="flex-1">
-        <!-- Chart placeholder styled similarly to your example -->
-        <div class="h-64 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 flex items-end p-6 relative">
-          <div class="absolute top-4 left-6 text-white font-bold text-xl">NVIEA</div>
-          <div class="bg-black text-lime-400 px-3 py-1 rounded-lg font-mono text-sm">365 Days Candles</div>
-          <svg class="absolute right-6 bottom-6 w-24 h-24 opacity-30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 17v-6a1 1 0 011-1h2m4 7v-4a1 1 0 011-1h2m4 5v-10a1 1 0 011-1h2" />
-          </svg>
-        </div>
-      </div>
-    </section>
+<!-- Hero Section -->
+<section class="py-20 flex items-center justify-center px-6">
+  <div class="max-w-4xl w-full flex flex-col md:flex-row items-center gap-10">
+    <!-- Text Content -->
+    <div class="flex-1 space-y-6 text-center md:text-left">
+      <h2 class="text-5xl font-extrabold leading-tight text-white">
+        Backtest and Predict TESLA Stock <br class="hidden md:block"/> with Confidence
+      </h2>
+      <p class="text-gray-300 text-lg max-w-xl mx-auto md:mx-0">
+        Explore 365 days of candle chart data, select your trading window, and receive tailored prediction analysis backed by powerful backtesting tools.
+      </p>
+      <a href="/backtest" class="inline-block bg-lime-400 text-black px-8 py-3 rounded-xl font-semibold hover:bg-lime-500 transition">
+        Start Backtesting →
+      </a>
+    </div>
+  </div>
+</section>
+
 
     <!-- Features Section -->
     <section id="features" class="mb-20">
-      <h3 class="text-3xl font-bold mb-8 text-lime-400">Key Features</h3>
+      <h3 class="text-3xl font-bold mb-8 text-lime-400 text-center">Key Features</h3>
       <div class="grid md:grid-cols-3 gap-12 text-gray-300">
         <div class="bg-[#1a1a1a] rounded-2xl p-6 shadow-lg hover:shadow-lime-400 transition cursor-default">
           <h4 class="text-xl font-semibold mb-3 text-white">365-Day Candle Charts</h4>
@@ -96,7 +90,7 @@
 
     <!-- Footer -->
     <footer class="mt-auto pt-10 text-gray-500 text-sm text-center">
-      &copy; 2025 NVIEA Analyzer. All rights reserved.
+      &copy; 2025 CandleCast. All rights reserved.
     </footer>
   </div>
 </body>

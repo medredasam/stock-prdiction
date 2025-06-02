@@ -190,9 +190,10 @@ def run_backtest_model(model_name,model_path, dataset, stride, days_per_image):
         equity_curve = pd.DataFrame({'Equity': results['_equity_curve']['Equity']}, index=df.index[-len(results['_equity_curve']):])
         
         fig = make_subplots(
-            rows=2, cols=1, shared_xaxes=True, vertical_spacing=0.05,
-            row_heights=[0.7, 0.3], subplot_titles=("Graphique des Prix", "Courbe d'Équité")
+            rows=2, cols=1, shared_xaxes=False, vertical_spacing=0.05,
+            row_heights=[0.7, 0.3]
         )
+        
         
         fig.add_trace(go.Candlestick(
             x=df.index, open=df['Open'], high=df['High'],
@@ -202,7 +203,7 @@ def run_backtest_model(model_name,model_path, dataset, stride, days_per_image):
         
         fig.add_trace(go.Scatter(
             x=df.index, y=df['SMA20'], name='SMA 20',
-            line=dict(color='blue', width=1)), row=1, col=1
+            line=dict(color='#c1ff72', width=1)), row=1, col=1
         )
         fig.add_trace(go.Scatter(
             x=df.index, y=df['SMA50'], name='SMA 50',
@@ -224,17 +225,18 @@ def run_backtest_model(model_name,model_path, dataset, stride, days_per_image):
         
         fig.add_trace(go.Scatter(
             x=equity_curve.index, y=equity_curve['Equity'],
-            name='Equity', line=dict(color='purple', width=2)),
+            name='Equity', line=dict(color='#c1ff72', width=2)),
             row=2, col=1
         )
         
         fig.update_layout(
-        title=f'Résultats du Backtest - {model_name}',
+        
         height=800,
         showlegend=True,
         xaxis_rangeslider_visible=False,
         hovermode='x unified',
-        plot_bgcolor='#1a1a1a',
+  
+        plot_bgcolor='#191919',
         paper_bgcolor='#1a1a1a'
 )
 

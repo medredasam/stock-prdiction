@@ -121,8 +121,8 @@
 <body class="bg-[#101010] text-white min-h-screen flex flex-col">
   <div class="max-w-6xl mx-auto p-6 flex flex-col min-h-screen">
     <!-- Header -->
-    <header class="flex justify-between items-center mb-12">
-      <h1 class="text-3xl font-bold text-lime-400 cursor-default">NVIEA Analyzer</h1>
+    <header class="flex justify-between items-center mb-6">
+      <h1 class="text-3xl font-bold text-lime-400 cursor-default">CandleCast</h1>
       <nav class="space-x-6 text-gray-300">
         <a href="{{ url_for('home') }}" class="hover:text-lime-400 transition">Home</a>
         <a href="{{ url_for('backtest') }}" class="hover:text-lime-400 transition font-semibold underline decoration-lime-400">Backtest</a>
@@ -134,19 +134,19 @@
     <div class="flex flex-col lg:flex-row gap-10">
       <!-- Left Side: Chart -->
       <section class="lg:w-2/3 w-full">
-        <h2 class="text-4xl font-extrabold  mb-6">
-          Graphique Tesla - 365 derniers jours
+        <h2 class="text-4xl font-extrabold  mb-2">
+          Tesla Chart – Last 365 Days
         </h2>
 
         <div class="bg-[#1a1a1a] rounded-2xl p-6 shadow-lg">
           <div class="plotly-graph">
+
             {{ backtest_html | safe }}
           </div>
         </div>
       </section>
-
       <!-- Right Side: Window selector and info -->
-      <aside class="lg:w-1/3 w-full bg-[#1a1a1a] rounded-2xl p-6 shadow-lg">
+      <aside class="lg:w-2/5 w-full bg-[#1a1a1a] rounded-2xl p-6 shadow-lg">
         <h3 class="text-lg font-bold text-lime-400 mb-4 uppercase tracking-widest">
           Choose Your Trading Window
         </h3>
@@ -154,13 +154,10 @@
         <!-- Window buttons -->
         <div class="space-y-4">
           <form method="POST" action="/run-backtest">
-           
-
-         
           <button
-            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition text-gray-300 py-3 mb-4  rounded-xl font-semibold flex items-center justify-center space-x-3"
+            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition text-gray-300 py-3 mb-2  rounded-xl font-semibold flex items-center justify-center space-x-3"
           type="submit" name="model_name" value="model_8">
-            <span>Window 3 : 8 Candles</span>
+            <span>Window 1 : 8 Candles</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
               <path
                 d="M17 9V7a2 2 0 00-2-2h-1V4a2 2 0 00-2-2H8a2 2 0 00-2 2v1H5a2 2 0 00-2 2v2H1v6h2v2a2 2 0 002 2h10a2 2 0 002-2v-2h2V9h-2zm-2 5H5v-4h10v4z"
@@ -169,9 +166,9 @@
           </button>
 
           <button
-            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition mb-4  text-gray-300 py-3 rounded-xl font-semibold flex items-center justify-center space-x-3"
+            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black transition mb-2  text-gray-300 py-3 rounded-xl font-semibold flex items-center justify-center space-x-3"
          type="submit" name="model_name" value="model_10">
-            <span>Window 4 : 10 Candles</span>
+            <span>Window 2 : 10 Candles</span>
 
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
               <path
@@ -181,11 +178,9 @@
           </button>
 
           <button
-            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black mb-4  transition text-gray-300 py-3 rounded-xl font-semibold flex items-center justify-center space-x-3"
-
-  
+            class="w-full bg-[#222222] hover:bg-lime-400 hover:text-black mb-2  transition text-gray-300 py-3 rounded-xl font-semibold flex items-center justify-center space-x-3"
           type="submit" name="model_name" value="model_20">
-            <span>Window 5 : 20 Candles</span>
+            <span>Window 3 : 20 Candles</span>
 
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-lime-400" fill="currentColor" viewBox="0 0 20 20">
               <path
@@ -196,20 +191,13 @@
            </form>
 
         </div>
-
         <!-- Balance Info -->
         <div
-          class="mt-8 bg-[#222222] p-5 rounded-xl text-gray-300 text-sm leading-relaxed"
+          class="mt-2 bg-[#222222] p-5 rounded-xl text-gray-300 text-sm leading-relaxed"
         >
-
           <div class="text-xl font-bold text-white mb-2">Why Choose a window </div>
           <p>
-            Select the trading window you wish to view or interact with. Each window
-            represents a different preset or strategy for analyzing Tesla's
-            performance over the past year. This allows you to easily switch
-            perspectives, compare scenarios, and make informed decisions before
-            taking action.
-          </p>
+Choose a trading window to view different strategies for analyzing Tesla’s past-year performance. Switch between them to compare scenarios and make smarter decisions.          </p>
         </div>
       </aside>
     </div>

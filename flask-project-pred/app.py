@@ -110,7 +110,7 @@ def run_backtest():
         },
         "model_20": {
             "model_path": "models/end2end_model_20250530_203710.keras",
-            "dataset": "dataset_auto/sequences",
+            "dataset": "dataset_auto_20_bougie/sequences",
             "stride": 5,
             "days_per_image": 20
         }
